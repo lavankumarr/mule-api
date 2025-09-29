@@ -7,7 +7,6 @@
 	<artifactId>ok</artifactId>
 	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
-
 	<name>ok</name>
 
 	<properties>
