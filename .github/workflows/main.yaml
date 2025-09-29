@@ -1,0 +1,32 @@
+name: CI Pipeline
+
+run: |
+        curl -X POST https://anypoint.mulesoft.com/cloudhub/api/v2/applications 
+        -u 2fd37cf58342493584ae4afb264842d8:73913efa2eDE454191ee22e0D0696d31 
+        -H "Content-Type: application/json" 
+        -d @deployment-config.json
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+
+    - name: Build with Maven
+      run: mvn clean install
+
+    - name: Run tests
+      run: mvn test
